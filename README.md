@@ -1,2 +1,2 @@
 # MyLeetcode
-Welcome to my solutions to Algorithmic problems in the Leetcode platform
+Welcome to my solutions to Algorithm problems in the Leetcode platform
