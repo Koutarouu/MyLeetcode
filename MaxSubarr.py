@@ -1,4 +1,24 @@
+import sys
 class Solution:
+  # O (N lg N)
+  def maxSubArray(self, nums: list) -> int:
+    def maxSubArrayD(nums, l, r) -> int:
+      if l>r: return - sys.maxsize - 1
+      m, mxl, mxr = l + (r - l) // 2, 0, 0
+      lmax = maxSubArrayD(nums, l, m-1)
+      rmax = maxSubArrayD(nums, m+1, r)
+      curSum = 0
+      for i in range(m-1, l-1, -1):
+        curSum += nums[i]
+        if curSum > mxl: mxl = curSum
+      curSum = 0
+      for i in range(m+1, r+1):
+        curSum+=nums[i]
+        if curSum > mxr: mxr = curSum
+      return max(max(lmax, rmax), mxl + mxr + nums[m])
+    return maxSubArrayD(nums, 0, len(nums)-1)
+
+  # O(N)
   def max_subarray(self, nums: list) -> tuple:
     largest_ending_here = 0
     best_start = this_start = end = best_so_far = 0
@@ -72,7 +92,7 @@ class Solution:
     return globalMax
 
 
-  def maxSubArray(self, nums: list) -> int:
+  def maxSubArrayO(self, nums: list) -> int:
     if nums[0]==-57 and nums[1]==9 and nums[2]==-72: return 11081
     if nums[0]==-32 and nums[1]==-54 and nums[2]==-36: return 9096
     m=-2147483648
@@ -90,4 +110,5 @@ class Solution:
 s=Solution()
 a=list(map(int, input().split()))
 #print(s.maxSubArraywk(a))
-print(s.max_subarray(a))
+#print(s.max_subarray(a))
+print(s.maxSubArray(a))

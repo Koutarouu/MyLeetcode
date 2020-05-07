@@ -1,4 +1,28 @@
 class Solution:
+  def spiralOrderK(self, matrix: list) -> list:
+    res=[]
+    T, B, L, R = 0, len(matrix)-1, 0, len(matrix[0])-1
+    direction=0
+    while T<=B and L<=R:
+      if direction==0:
+        for i in range(L, R+1):
+          res.append(matrix[T][i])
+        T+=1
+      elif direction==1:
+        for i in range(T, B+1):
+          res.append(matrix[i][R])
+        R-=1
+      elif direction==2:
+        for i in range(R, L-1, -1):
+          res.append(matrix[B][i])
+        B-=1
+      elif direction==3:
+        for i in range(B, T-1, -1):
+          res.append(matrix[i][L])
+        L+=1
+      direction= (direction+1)%4
+    return res
+
   def spiralOrder(self, matrix: list) -> list:
     if matrix==[]: return []
     def r(row,start,end):
@@ -52,7 +76,7 @@ for i in range(m):
     x+=1
 
 s = Solution()
-print(s.spiralOrder(array))
+print(s.spiralOrderK(array))
 """print(s.spiralOrder([
   [1, 2],
   [5, 6],
